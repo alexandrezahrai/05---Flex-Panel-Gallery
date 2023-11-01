@@ -76,7 +76,7 @@
       }
 
       /* Flex Children */
-      .panel > * {
+      .panel p {
         margin: 0;
         width: 100%;
         transition: transform 0.5s;
@@ -84,9 +84,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-
-      .panel p {
         text-transform: uppercase;
         font-family: "Amatic SC", cursive;
         text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
@@ -101,7 +98,7 @@
         font-size: 4em;
       }
 
-      .panel p:last-child {
+      .panel p:nth-child(3) {
         transform: translateY(100%);
       }
 
@@ -111,9 +108,17 @@
       }
 
       .panel.open p:first-child,
-      .panel.open p:last-child {
+      .panel.open p:nth-child(3) {
         transform: translateY(0%);
         transition-delay: 150ms;
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        display: block;
       }
     </style>
 
@@ -122,41 +127,45 @@
         <p>Hey</p>
         <p>Let's</p>
         <p>Dance</p>
+        <div class="overlay"></div>
       </div>
       <div class="panel panel2">
         <p>Give</p>
         <p>Take</p>
         <p>Receive</p>
+        <div class="overlay"></div>
       </div>
       <div class="panel panel3">
         <p>Experience</p>
         <p>It</p>
         <p>Today</p>
+        <div class="overlay"></div>
       </div>
       <div class="panel panel4">
         <p>Give</p>
         <p>All</p>
         <p>You can</p>
+        <div class="overlay"></div>
       </div>
       <div class="panel panel5">
         <p>Life</p>
         <p>In</p>
         <p>Motion</p>
+        <div class="overlay"></div>
       </div>
     </div>
 
     <script>
+      const overlays = document.querySelectorAll(".overlay");
       const panels = document.querySelectorAll(".panel");
 
-      panels.forEach((panel) => {
-        const middleText = panel.querySelector("p:nth-child(2)");
-
-        middleText.addEventListener("mouseover", function openPanel() {
-          panel.classList.add("open");
+      overlays.forEach((overlay, index) => {
+        overlay.addEventListener("mouseover", function openPanel() {
+          panels[index].classList.add("open");
         });
 
-        panel.addEventListener("mouseleave", function closePanel() {
-          panel.classList.remove("open");
+        overlay.addEventListener("mouseleave", function closePanel() {
+          panels[index].classList.remove("open");
         });
       });
     </script>
